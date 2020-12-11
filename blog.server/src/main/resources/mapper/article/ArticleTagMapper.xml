@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zlz.blog.server.article.mapper.ArticleTagMapper">
+    <sql id="insertSql">
+        (id, name, used_number, type_id, creator, created_time, last_modifier, last_modified_time)
+    </sql>
+
+    <insert id="insertList">
+        INSERT IGNORE blog_tag
+        <include refid="insertSql"></include>
+        VALUES
+        <foreach collection="blogTags" item="item" separator=",">
+            (
+            #{item.id},#{item.name},#{item.usedNumber},#{item.typeId},#{item.creator},
+            #{item.createdTime},#{item.lastModifier},#{item.lastModifiedTime}
+            )
+        </foreach>
+    </insert>
+</mapper>
