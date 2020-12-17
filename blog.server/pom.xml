@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.zlz.blog</groupId>
         <artifactId>blog-manage-service</artifactId>
-        <version>1.0.0.RELEASE</version>
+        <version>2.0.0.RELEASE</version>
     </parent>
     <artifactId>blog.server</artifactId>
     <packaging>jar</packaging>
@@ -101,6 +101,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zlz.blog</groupId>
+            <artifactId>blog.common</artifactId>
+            <version>2.0.0.RELEASE</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
