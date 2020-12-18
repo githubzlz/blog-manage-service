@@ -33,15 +33,17 @@
       <result property="readings" column="sta_readings"/>
       <result property="collect" column="sta_collect"/>
     </association>
-    <collection property="tags" ofType="com.zlz.blog.common.entity.tag.Tag">
-      <id property="id" column="tag_id"/>
-      <result property="typeId" column="tag_type_id"/>
-      <result property="name" column="tag_name"/>
-      <result property="code" column="tag_code"/>
-    </collection>
+    <collection property="tags" ofType="com.zlz.blog.common.entity.tag.Tag" select="selectBlogTag" column="id"/>
   </resultMap>
   <sql id="Base_Column_Blog">
-    id, user_id, title, summary, author, provenance, visible_strategy, img_src
+    blog.id,
+    blog.user_id,
+    blog.title,
+    blog.summary,
+    blog.author,
+    blog.provenance,
+    blog.visible_strategy,
+    blog.img_src
   </sql>
   <sql id="Base_Column_Content">
     content.id as content_id,
@@ -60,46 +62,28 @@
     sta.readings as sta_readings,
     sta.collect as sta_collect
   </sql>
-  <sql id="Base_Column_Tag">
-    tag.id as tag_id,
-    tag.type_id as tag_type_id,
-    tag.name as tag_name,
-    tag.code as tag_code
-  </sql>
   <select id="selectDetailById" resultMap="BaseResultMap">
     SELECT
         <include refid="Base_Column_Blog" />,
         <include refid="Base_Column_Content"/>,
         <include refid="Base_Column_Statistics"/>,
-        tagi.tag_id,tagi.blog_id,tag.state,
-        <include refid="Base_Column_Tag"/>
     FROM blog
     LEFT JOIN blog_content content
     ON blog.id = content.blog_id
     LEFT JOIN blog_statistics sta
     ON blog.id = sta.blog_id
-    LEFT JOIN blog_tag tagi
-    ON blog.id = tagi.blog_id
-    LEFT JOIN tag tag
-    ON tagi.tag_id = tag.id AND tag.state = 1
     WHERE blog.id = #{id} AND blog.creator = #{userId}
   </select>
   <select id="selectPage" resultMap="BaseResultMap">
     SELECT
       <include refid="Base_Column_Blog" />,
       <include refid="Base_Column_Content"/>,
-      <include refid="Base_Column_Statistics"/>,
-      tagi.tag_id,tagi.blog_id,tag.state,
-      <include refid="Base_Column_Tag"/>
-    FROM blog
+      <include refid="Base_Column_Statistics"/>
+    FROM blog blog
     LEFT JOIN blog_content content
     ON blog.id = content.blog_id
     LEFT JOIN blog_statistics sta
     ON blog.id = sta.blog_id
-    LEFT JOIN blog_tag tagi
-    ON blog.id = tagi.blog_id
-    LEFT JOIN tag tag
-    ON tagi.tag_id = tag.id AND tag.state = 1
     <where>
       <if test="blog.pageInfo != null and blog.pageInfo.exclude != null">
         <foreach collection="blog.pageInfo.exclude" item="item">
@@ -124,5 +108,15 @@
       </if>
       AND blog.creator = #{blog.userId}
     </where>
+    GROUP BY blog.id
+  </select>
+
+  <select id="selectBlogTag" resultType="com.zlz.blog.common.entity.tag.Tag">
+    SELECT
+       tag.*
+    FROM blog_tag tagi
+    LEFT JOIN tag tag
+    ON tagi.tag_id = tag.id AND tag.state = 1
+    WHERE tagi.blog_id = #{id}
   </select>
 </mapper>

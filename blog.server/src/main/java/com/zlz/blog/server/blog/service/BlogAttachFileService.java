@@ -1,5 +1,6 @@
 package com.zlz.blog.server.blog.service;
 
+import com.zlz.blog.common.entity.blog.BlogAttachFile;
 import com.zlz.blog.common.response.ResultSet;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +21,7 @@ public interface BlogAttachFileService {
      * @return 上传文件返回消息封装的对象
      * @throws IOException io异常
      */
-    ResultSet uploadImage(MultipartFile file) throws IOException, NoSuchAlgorithmException;
+    ResultSet<BlogAttachFile> uploadImage(MultipartFile file) throws IOException, NoSuchAlgorithmException;
 
     /**
      * 下载文件

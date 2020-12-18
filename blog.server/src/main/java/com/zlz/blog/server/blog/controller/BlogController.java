@@ -1,6 +1,7 @@
 package com.zlz.blog.server.blog.controller;
 
 import com.zlz.blog.common.entity.blog.Blog;
+import com.zlz.blog.common.entity.blog.BlogAttachFile;
 import com.zlz.blog.common.response.ResultSet;
 import com.zlz.blog.server.blog.service.BlogAttachFileService;
 import com.zlz.blog.server.blog.service.BlogService;
@@ -38,9 +39,9 @@ public class BlogController {
 
     /**
      * 新增文章
-     * @param blog
-     * @param request
-     * @return
+     * @param blog blog
+     * @param request request
+     * @return ResultSet
      */
     @PostMapping("/create")
     public ResultSet<Blog> insertArticle(@RequestBody Blog blog, HttpServletRequest request) {
@@ -49,9 +50,9 @@ public class BlogController {
 
     /**
      * 修改文章
-     * @param blog
-     * @param request
-     * @return
+     * @param blog blog
+     * @param request request
+     * @return ResultSet
      */
     @PostMapping("/update")
     public ResultSet<Blog> updateArticle(@RequestBody Blog blog, HttpServletRequest request) {
@@ -60,9 +61,9 @@ public class BlogController {
 
     /**
      * 修改文章（仅标题摘要）
-     * @param blog
-     * @param request
-     * @return
+     * @param blog blog
+     * @param request request
+     * @return ResultSet
      */
     @PostMapping("/titleorsummary")
     public ResultSet<Blog> updateArticleTitle(@RequestBody Blog blog, HttpServletRequest request) {
@@ -71,9 +72,9 @@ public class BlogController {
 
     /**
      * 分页查询,模糊查询
-     * @param blog
-     * @param request
-     * @return
+     * @param blog blog
+     * @param request request
+     * @return ResultSet
      */
     @PostMapping("/list")
     public ResultSet<Blog> selectAll(@RequestBody Blog blog, HttpServletRequest request) {
@@ -85,7 +86,7 @@ public class BlogController {
      *
      * @param id      id
      * @param request request
-     * @return return
+     * @return ResultSet
      */
     @GetMapping("/queryarticle/{id}")
     public ResultSet<Blog> selectArticle(@PathVariable("id") Long id, HttpServletRequest request) {
@@ -130,11 +131,10 @@ public class BlogController {
      * 上传图片，返回图片地址到前端
      *
      * @param file 文件
-     * @param request  request
      * @throws IOException IOException
      */
     @PostMapping("/image/upload")
-    public ResultSet upload(MultipartFile file, HttpServletRequest request) throws IOException, NoSuchAlgorithmException {
+    public ResultSet<BlogAttachFile> upload(MultipartFile file) throws IOException, NoSuchAlgorithmException {
         return blogAttachFileService.uploadImage(file);
     }
 

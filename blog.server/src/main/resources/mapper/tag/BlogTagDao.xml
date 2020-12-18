@@ -14,7 +14,7 @@
         blog_tag
         (id, blog_id, tag_id)
     VALUES
-    <foreach collection="tags" item="tag" separator=",">
+    <foreach collection="blogTags" item="tag" separator=",">
       (#{tag.id}, #{blogId}, #{tag.tagId})
     </foreach>
   </insert>

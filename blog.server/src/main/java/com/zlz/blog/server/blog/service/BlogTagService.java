@@ -22,5 +22,5 @@ public interface BlogTagService {
      * @param request
      * @return
      */
-    ResultSet<BlogTag> insertTagList(Long blogId, List<Tag> tags, HttpServletRequest request);
+    ResultSet<BlogTag> insertTagList(Long blogId, List<BlogTag> blogTags, HttpServletRequest request);
 }

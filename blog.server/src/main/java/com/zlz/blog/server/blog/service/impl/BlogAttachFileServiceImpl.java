@@ -37,7 +37,7 @@ public class BlogAttachFileServiceImpl implements BlogAttachFileService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public ResultSet uploadImage(MultipartFile file) throws IOException, NoSuchAlgorithmException {
+    public ResultSet<BlogAttachFile> uploadImage(MultipartFile file) throws IOException, NoSuchAlgorithmException {
 
         MessageDigest md5I = MessageDigest.getInstance("MD5");
         md5I.update(file.getBytes());

@@ -2,6 +2,7 @@ package com.zlz.blog.server.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zlz.blog.common.constants.article.ArticleConstants;
 import com.zlz.blog.common.entity.blog.Blog;
 import com.zlz.blog.common.entity.blog.BlogContent;
@@ -21,6 +22,7 @@ import com.zlz.blog.common.util.TokenUtil;
 import com.zlz.blog.server.blog.mapper.BlogMapper;
 import com.zlz.blog.server.blog.service.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -50,6 +52,7 @@ public class BlogServiceImpl implements BlogService{
     private BlogMapper blogMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ResultSet<Blog> insertBlog(Blog blog, HttpServletRequest request) {
         if (null == blog || StringUtils.isEmpty(blog.getTitle())) {
             throw new BlogException("插入错误,数据为空");
@@ -84,12 +87,13 @@ public class BlogServiceImpl implements BlogService{
         insertBlogInfos(blog, request);
 
         //插入文章标签
-        insertBlogTag(blog.getId(), blog.getTags(), request);
+        insertBlogTag(blog.getId(), blog.getBlogTag(), request);
 
         return ResultSet.success("文章保存成功");
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ResultSet<Blog> updateBlog(Blog blog, HttpServletRequest request) {
         LoginUser loginUser = TokenUtil.getLoginUser(request);
         if (StringUtils.isEmpty(loginUser.getUsername()) || null == blog.getId()) {
@@ -283,11 +287,11 @@ public class BlogServiceImpl implements BlogService{
      * 插入标签，分类相关信息
      *
      * @param blogId blogId
-     * @param tags tags
+     * @param blogTags blogTags
      */
-    private void insertBlogTag(Long blogId, List<Tag> tags, HttpServletRequest request) {
+    private void insertBlogTag(Long blogId, List<BlogTag> blogTags, HttpServletRequest request) {
 
-        ResultSet<BlogTag> resultSet = blogTagService.insertTagList(blogId, tags, request);
+        ResultSet<BlogTag> resultSet = blogTagService.insertTagList(blogId, blogTags, request);
 
         if (!ResultSet.isSuccess(resultSet)) {
             throw new BlogException("文章浏览信息插入失败");

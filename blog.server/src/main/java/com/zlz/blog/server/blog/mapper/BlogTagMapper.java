@@ -18,9 +18,9 @@ public interface BlogTagMapper extends BaseMapper<BlogTag> {
 
     /**
      * 批量插入标签关联信息
-     * @param tags
-     * @param blogId
+     * @param blogTags blogTags
+     * @param blogId blogId
      * @return
      */
-    int insertList(@Param("blogId") Long blogId, @Param("blogTags") List<Tag> tags);
+    int insertList(@Param("blogId") Long blogId, @Param("blogTags") List<BlogTag> blogTags);
 }

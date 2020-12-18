@@ -44,8 +44,8 @@ public class TokenUtil {
 
             //设置用户信息实体
             LoginUser loginUser = new LoginUser();
-            loginUser.setUsername("zlz");
-            loginUser.setId(2L);
+            loginUser.setUsername("zlztest");
+            loginUser.setId(10000L);
             return loginUser;
         } catch (Exception e) {
             log.error("Exception[{}]", e);

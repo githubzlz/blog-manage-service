@@ -29,16 +29,17 @@ public class BlogTagServiceImpl implements BlogTagService {
     private BlogTagMapper blogTagMapper;
 
     @Override
-    public ResultSet<BlogTag> insertTagList(Long blogId, List<Tag> tags, HttpServletRequest request) {
+    public ResultSet<BlogTag> insertTagList(Long blogId, List<BlogTag> blogTags, HttpServletRequest request) {
 
         //数据检查
-        if (null == blogId || tags.isEmpty()) {
+        if (null == blogId || blogTags.isEmpty()) {
             return ResultSet.inputError();
         }
-        tags.forEach(tag ->{
+        blogTags.forEach(tag ->{
             tag.setId(IdWorker.getId());
         });
         //插入标签
-        return SqlResultUtil.isOneRow(blogTagMapper.insertList(blogId, tags));
+        int i = blogTagMapper.insertList(blogId, blogTags);
+        return ResultSet.success("插入成功");
     }
 }

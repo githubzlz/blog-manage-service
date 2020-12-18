@@ -102,6 +102,12 @@ public class Blog implements Serializable {
     private List<Tag> tags;
 
     /**
+     * 文章的标签
+     */
+    @TableField(exist = false)
+    private List<BlogTag> blogTag;
+
+    /**
      * 文章的评论
      */
     @TableField(exist = false)

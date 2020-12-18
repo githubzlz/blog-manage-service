@@ -3,11 +3,8 @@ package com.zlz.blog.server.blog.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.zlz.blog.common.entity.blog.Blog;
-import com.zlz.blog.common.response.ResultSet;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 文章操作的service接口
