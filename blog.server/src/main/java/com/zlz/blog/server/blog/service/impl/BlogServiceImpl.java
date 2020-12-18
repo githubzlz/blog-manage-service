@@ -1,6 +1,7 @@
 package com.zlz.blog.server.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zlz.blog.common.constants.article.ArticleConstants;
@@ -219,14 +220,7 @@ public class BlogServiceImpl implements BlogService{
         if (id == null || StringUtils.isEmpty(loginUser.getUsername())) {
             return ResultSet.inputError();
         }
-
-        //设置修改条件
-        Blog blogArticle = new Blog();
-        blogArticle.setId(id);
-        blogArticle.setIsDeleted(ArticleConstants.IS_NOT_DELETED);
-
-        //处理修改结果
-        int i = blogMapper.updateById(blogArticle);
+        int i = blogMapper.revokeDelete(id);
         return SqlResultUtil.isOneRow(i);
     }
 

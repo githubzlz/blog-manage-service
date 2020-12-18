@@ -49,11 +49,11 @@ public class BlogContent implements Serializable {
      */
     private String mdSize;
 
-    private String creator;
+    private Long creator;
 
     private Date createdTime;
 
-    private String lastModifier;
+    private Long lastModifier;
 
     private Date lastModifiedTime;
 

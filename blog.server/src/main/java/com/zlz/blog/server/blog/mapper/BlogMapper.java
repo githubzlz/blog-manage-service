@@ -21,7 +21,7 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * @param userId
      * @return
      */
-    Blog selectDetailById(@Param("id") Long id, @Param("id")Long userId);
+    Blog selectDetailById(@Param("id") Long id, @Param("userId")Long userId);
 
     /**
      * 文章分页查询sql
@@ -31,4 +31,6 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * @return IPage
      */
     IPage<Blog> selectPage(IPage<Blog> page, @Param("blog") Blog blog);
+
+    int revokeDelete(Long id);
 }

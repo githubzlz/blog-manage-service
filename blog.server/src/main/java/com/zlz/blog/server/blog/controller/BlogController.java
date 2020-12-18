@@ -26,12 +26,6 @@ public class BlogController {
 
     private BlogService blogService;
 
-    private BlogAttachFileService blogAttachFileService;
-
-    @Autowired
-    public void setBlogAttachFileService(BlogAttachFileService blogAttachFileService){
-        this.blogAttachFileService = blogAttachFileService;
-    }
     @Autowired
     public void setBlogService(BlogService blogService){
         this.blogService = blogService;
@@ -100,7 +94,7 @@ public class BlogController {
      * @param request request
      * @return ResultSet<Blog>
      */
-    @GetMapping("/remove/{id}")
+    @DeleteMapping("/remove/{id}")
     public ResultSet<Blog> deleteArticle(@PathVariable("id") Long id, HttpServletRequest request) {
         return blogService.deleteBlog(id, request);
     }
@@ -127,25 +121,4 @@ public class BlogController {
 //    public ResultSet<Blog> searchAll(@RequestParam(required = false) String param, HttpServletRequest request) {
 //        return blogService.searchAll(param, request);
 //    }
-    /**
-     * 上传图片，返回图片地址到前端
-     *
-     * @param file 文件
-     * @throws IOException IOException
-     */
-    @PostMapping("/image/upload")
-    public ResultSet<BlogAttachFile> upload(MultipartFile file) throws IOException, NoSuchAlgorithmException {
-        return blogAttachFileService.uploadImage(file);
-    }
-
-    /**
-     * 下载文件
-     *
-     * @param path     文件路径
-     * @param response response
-     */
-    @PostMapping("/download")
-    public void download(String path, HttpServletResponse response) {
-        blogAttachFileService.downloadFile(path, response);
-    }
 }

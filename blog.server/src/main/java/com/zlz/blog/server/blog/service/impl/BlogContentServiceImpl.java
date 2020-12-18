@@ -41,8 +41,8 @@ public class BlogContentServiceImpl implements BlogContentService {
         //补全数据
         content.setCreatedTime(new Date());
         content.setLastModifiedTime(new Date());
-        content.setCreator(loginUser.getUsername());
-        content.setLastModifier(loginUser.getUsername());
+        content.setCreator(loginUser.getId());
+        content.setLastModifier(loginUser.getId());
 
         //持久层数据处理并返回结果
         return SqlResultUtil.isOneRow(contentMapper.insert(content));
@@ -73,7 +73,7 @@ public class BlogContentServiceImpl implements BlogContentService {
 
         //补全数据
         blogContent.setLastModifiedTime(new Date());
-        blogContent.setLastModifier(loginUser.getUsername());
+        blogContent.setLastModifier(loginUser.getId());
 
         //设置查询条件
         QueryWrapper<BlogContent> queryWrapper = new QueryWrapper<>();

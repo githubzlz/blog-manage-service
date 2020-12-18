@@ -66,7 +66,7 @@
     SELECT
         <include refid="Base_Column_Blog" />,
         <include refid="Base_Column_Content"/>,
-        <include refid="Base_Column_Statistics"/>,
+        <include refid="Base_Column_Statistics"/>
     FROM blog
     LEFT JOIN blog_content content
     ON blog.id = content.blog_id
@@ -108,12 +108,15 @@
       </if>
       AND blog.creator = #{blog.userId}
     </where>
-    GROUP BY blog.id
   </select>
+
+  <update id="revokeDelete">
+    UPDATE blog SET is_deleted = 0 WHERE id = #{id} AND is_deleted = 1;
+  </update>
 
   <select id="selectBlogTag" resultType="com.zlz.blog.common.entity.tag.Tag">
     SELECT
-       tag.*
+       tag.name
     FROM blog_tag tagi
     LEFT JOIN tag tag
     ON tagi.tag_id = tag.id AND tag.state = 1
