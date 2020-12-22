@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zlz.blog.common.entity.blog.Blog;
+import com.zlz.blog.common.entity.common.BaseEntity;
 import lombok.Data;
 
 /**
@@ -18,7 +19,7 @@ import lombok.Data;
  */
 @Data
 @TableName("module_menu")
-public class ModuleMenu implements Serializable {
+public class ModuleMenu extends BaseEntity<ModuleMenu> {
     private static final long serialVersionUID = 9025708445064044104L;
     /**
      * 目录id
@@ -37,28 +38,8 @@ public class ModuleMenu implements Serializable {
     private String name;
 
     /**
-     * 创建人
-     */
-    private Long creator;
-
-    /**
-     * 创建时间
-     */
-    private Date createdTime;
-
-    /**
-     * 最后修改人
-     */
-    private Long lastModifier;
-
-    /**
-     * 最后修改时间
-     */
-    private Date lastModifiedTime;
-
-    /**
      * 博客文章
      */
     @TableField(exist = false)
-    private List<Blog> blogs;
+    private List<ModuleMenuBlog> blogList;
 }

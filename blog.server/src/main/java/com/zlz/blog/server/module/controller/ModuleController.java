@@ -1,4 +1,4 @@
-package com.zlz.blog.server.module;
+package com.zlz.blog.server.module.controller;
 
 import com.zlz.blog.common.entity.module.Module;
 import com.zlz.blog.common.response.ResultSet;
@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * created by zlz on 2020/12/21 9:56
@@ -22,8 +24,24 @@ public class ModuleController {
         this.moduleService = moduleService;
     }
 
-    @PostMapping("/pagelist")
+    /**
+     * 分页查询列表
+     * @param module
+     * @return
+     */
+    @PostMapping("/list")
     public ResultSet<Module> getPageList(@RequestBody Module module){
         return moduleService.getPageList(module);
+    }
+
+    /**
+     * 新增
+     * @param module
+     * @param request
+     * @return
+     */
+    @PostMapping("/create")
+    public ResultSet<Module> createModule(@RequestBody Module module, HttpServletRequest request){
+        return moduleService.createModule(request, module);
     }
 }

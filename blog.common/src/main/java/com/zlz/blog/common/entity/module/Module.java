@@ -1,14 +1,13 @@
 package com.zlz.blog.common.entity.module;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.zlz.blog.common.entity.common.BaseEntity;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @author peeterZ
@@ -17,7 +16,7 @@ import lombok.Data;
  */
 @Data
 @TableName("module")
-public class Module implements Serializable {
+public class Module extends BaseEntity<Module> {
     private static final long serialVersionUID = -3086115441709363100L;
     /**
      * 模块id
@@ -46,24 +45,9 @@ public class Module implements Serializable {
     private Integer isPublish;
 
     /**
-     * 创建人
+     * 0 未删除 1 删除
      */
-    private Long creator;
-
-    /**
-     * 创建时间
-     */
-    private Date createdTime;
-
-    /**
-     * 最后修改人
-     */
-    private Long lastModifier;
-
-    /**
-     * 最后修改时间
-     */
-    private Date lastModifiedTime;
+    private Integer isDeleted;
 
     /**
      * 模块的菜单

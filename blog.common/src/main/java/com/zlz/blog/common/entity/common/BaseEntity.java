@@ -14,19 +14,19 @@ import java.util.Date;
  * @version 1.0 CreateTime:2019/12/20 17:25
  */
 @Data
-public class BaseEntity implements Serializable {
+public class BaseEntity<T> implements Serializable {
 
     private static final long serialVersionUID = 6953538375643325713L;
 
-    private String creator;
+    private Long creator;
 
     private Date createdTime;
 
-    private String lastModifier;
+    private Long lastModifier;
 
     private Date lastModifiedTime;
 
     @TableField(exist = false)
-    private PageInfo pageInfo;
+    private PageInfo<T> pageInfo;
 
 }
