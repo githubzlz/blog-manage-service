@@ -1,7 +1,6 @@
 package com.zlz.blog.server.blog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zlz.blog.common.entity.blog.BlogAttachFile;
 import com.zlz.blog.common.entity.blog.BlogContent;
 import org.apache.ibatis.annotations.Mapper;
 

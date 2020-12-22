@@ -1,7 +1,6 @@
 package com.zlz.blog.server.blog.service;
 
 import com.zlz.blog.common.entity.blog.BlogTag;
-import com.zlz.blog.common.entity.tag.Tag;
 import com.zlz.blog.common.response.ResultSet;
 
 import javax.servlet.http.HttpServletRequest;
