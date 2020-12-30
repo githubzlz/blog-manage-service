@@ -1,6 +1,7 @@
 package com.zlz.blog.server.module.service.impl;
 
-import com.zlz.blog.common.entity.common.LoginUser;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zlz.blog.common.entity.user.LoginUser;
 import com.zlz.blog.common.entity.module.Module;
 import com.zlz.blog.common.response.PageInfo;
 import com.zlz.blog.common.response.ResultSet;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.List;
 
 /**
  * created by zlz on 2020/12/21 9:59
@@ -26,16 +26,16 @@ public class ModuleServiceImpl implements ModuleService {
     private ModuleMapper moduleMapper;
 
     @Override
-    public ResultSet<Module> getPageList(Module module) {
+    public ResultSet<PageInfo<Module>> getPageList(Module module) {
 
         if(null == module || null == module.getPageInfo()){
             return ResultSet.error("缺少查询参数");
         }
 
         PageInfo<Module> pageInfo = module.getPageInfo();
-        List<Module> modules = moduleMapper.selectPage(PageUtil.getIPage(pageInfo), module);
+        IPage<Module> moduleIPage = moduleMapper.selectPage(PageUtil.getIPage(pageInfo), module);
 
-        return ResultSet.success("分页查询成功", modules);
+        return ResultSet.success("分页查询成功", PageUtil.setPageInfo(moduleIPage, pageInfo));
     }
 
     @Override

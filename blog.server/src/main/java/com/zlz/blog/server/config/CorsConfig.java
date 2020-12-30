@@ -17,11 +17,12 @@ public class CorsConfig {
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         // 允许通过的域名
-        corsConfiguration.addAllowedOrigin("*");
+        corsConfiguration.addAllowedOrigin("http://localhost:4200");
         // 允许任何头
         corsConfiguration.addAllowedHeader("*");
         // 允许任何方法（post、get等）
         corsConfiguration.addAllowedMethod("*");
+        corsConfiguration.setAllowCredentials(true);
         return corsConfiguration;
     }
 

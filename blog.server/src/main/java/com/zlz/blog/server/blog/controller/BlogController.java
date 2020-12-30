@@ -3,6 +3,7 @@ package com.zlz.blog.server.blog.controller;
 import com.zlz.blog.common.entity.blog.Blog;
 import com.zlz.blog.common.response.ResultSet;
 import com.zlz.blog.server.blog.service.BlogService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +66,7 @@ public class BlogController {
      * @return ResultSet
      */
     @PostMapping("/list")
+    @RequiresPermissions("SystemUser")
     public ResultSet<Blog> selectAll(@RequestBody Blog blog, HttpServletRequest request) {
         return blogService.selectList(blog, request);
     }

@@ -99,13 +99,13 @@ public class Blog implements Serializable {
      * 文章的标签
      */
     @TableField(exist = false)
-    private List<Tag> tags;
+    private List<BlogTag> blogTag;
 
     /**
      * 文章的标签
      */
     @TableField(exist = false)
-    private List<BlogTag> blogTag;
+    private List<String> tags;
 
     /**
      * 文章的评论

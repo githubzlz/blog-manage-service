@@ -1,5 +1,7 @@
 package com.zlz.blog.common.enums;
 
+import javax.security.auth.Subject;
+
 /**
  * 返回状态枚举类
  */
@@ -23,7 +25,17 @@ public enum ResultCodeEnum {
     /**
      * 查询异常
      */
-    OUTPUT_ERROR(-3, "服务器异常，请重新尝试");
+    OUTPUT_ERROR(-3, "服务器异常，请重新尝试"),
+
+    /**
+     * 登陆失败
+     */
+    LOGIN_ERROR(401, "登陆失败,用户名或密码错误"),
+
+    /**
+     * 鉴权失败
+     */
+    UNAUTHORIZED_ERROR(403, "权限不足,请切换账号");
 
     /**
      * 代码

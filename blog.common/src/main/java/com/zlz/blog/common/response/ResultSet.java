@@ -198,4 +198,29 @@ public class ResultSet<T> implements Serializable {
     public static boolean isSuccess(ResultSet resultSet) {
         return null != resultSet && ResultCodeEnum.SUCCESS.getCode().equals(resultSet.getCode());
     }
+
+    /**
+     * 登陆验证失败
+     * @return
+     */
+    public static ResultSet loginError(String msg) {
+        return new ResultSet<>(msg, ResultCodeEnum.LOGIN_ERROR.getCode());
+    }
+
+    /**
+     * 鉴权失败,权限不足
+     * @return
+     */
+    public static ResultSet unauthorizedError(String msg) {
+        return new ResultSet<>(msg, ResultCodeEnum.UNAUTHORIZED_ERROR.getCode());
+    }
+
+    @Override
+    public String toString() {
+        return "ResultSet{" +
+                "message='" + message + '\'' +
+                ", code=" + code +
+                ", entity=" + entity +
+                '}';
+    }
 }

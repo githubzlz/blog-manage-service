@@ -19,5 +19,5 @@ public interface ModuleMapper extends BaseMapper<Module> {
      * @param module
      * @return
      */
-    List<Module> selectPage(IPage<Module> iPage, Module module);
+    IPage<Module> selectPage(IPage<Module> iPage, Module module);
 }

@@ -1,8 +1,9 @@
-package com.zlz.blog.server.config.login.mapper;
+package com.zlz.blog.server.login.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zlz.blog.common.entity.common.LoginUser;
+import com.zlz.blog.common.entity.user.LoginUser;
 import org.apache.ibatis.annotations.Mapper;
+import sun.plugin2.message.GetAuthenticationMessage;
 
 /**
  * @author zhulinzhong

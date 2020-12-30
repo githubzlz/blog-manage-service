@@ -1,6 +1,7 @@
 package com.zlz.blog.server.module.service;
 
 import com.zlz.blog.common.entity.module.Module;
+import com.zlz.blog.common.response.PageInfo;
 import com.zlz.blog.common.response.ResultSet;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ public interface ModuleService {
      * @param module
      * @return
      */
-    ResultSet<Module> getPageList(Module module);
+    ResultSet<PageInfo<Module>> getPageList(Module module);
 
     /**
      * 新增module

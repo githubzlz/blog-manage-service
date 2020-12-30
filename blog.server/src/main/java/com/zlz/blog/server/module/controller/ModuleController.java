@@ -1,6 +1,7 @@
 package com.zlz.blog.server.module.controller;
 
 import com.zlz.blog.common.entity.module.Module;
+import com.zlz.blog.common.response.PageInfo;
 import com.zlz.blog.common.response.ResultSet;
 import com.zlz.blog.server.module.service.ModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class ModuleController {
      * @return
      */
     @PostMapping("/list")
-    public ResultSet<Module> getPageList(@RequestBody Module module){
+    public ResultSet<PageInfo<Module>> getPageList(@RequestBody Module module){
         return moduleService.getPageList(module);
     }
 

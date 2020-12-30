@@ -33,7 +33,7 @@
       <result property="readings" column="sta_readings"/>
       <result property="collect" column="sta_collect"/>
     </association>
-    <collection property="tags" ofType="com.zlz.blog.common.entity.tag.Tag" select="selectBlogTag" column="id"/>
+    <collection property="tags" select="selectBlogTag" column="id"/>
   </resultMap>
   <sql id="Base_Column_Blog">
     blog.id,
@@ -43,7 +43,11 @@
     blog.author,
     blog.provenance,
     blog.visible_strategy,
-    blog.img_src
+    blog.img_src,
+    blog.is_deleted,
+    blog.is_show,
+    blog.created_time,
+    blog.creator
   </sql>
   <sql id="Base_Column_Content">
     content.id as content_id,
@@ -96,13 +100,8 @@
         OR blog.summary like concat('%',#{blog.title},'%')
         )
       </if>
-      <if test="null != blog.tags">
-        <foreach collection="blog.tags" item="item">
-          AND tag.name like concat('%',#{item.name},'%')
-        </foreach>
-      </if>
       <if test="null != blog.blogContent">
-        <if test="null != blog.blogContent.contentMd">
+        <if test="null != blog.blogContent.contentMd and '' != blog.blogContent.contentMd">
           AND content.content_md like concat('%',#{blog.blogContent.contentMd},'%')
         </if>
       </if>
@@ -114,7 +113,7 @@
     UPDATE blog SET is_deleted = 0 WHERE id = #{id} AND is_deleted = 1;
   </update>
 
-  <select id="selectBlogTag" resultType="com.zlz.blog.common.entity.tag.Tag">
+  <select id="selectBlogTag" resultType="java.lang.String">
     SELECT
        tag.name
     FROM blog_tag tagi
