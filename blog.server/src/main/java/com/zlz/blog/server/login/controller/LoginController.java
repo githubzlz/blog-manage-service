@@ -6,18 +6,12 @@ import com.zlz.blog.common.response.ResultSet;
 import com.zlz.blog.server.login.service.LoginUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * @author zhulinzhong
@@ -46,19 +40,7 @@ public class LoginController {
     @ResponseBody
     @PostMapping("/login")
     public ResultSet loginPage(@RequestBody LoginUser loginUser){
-        //获取当前的用户
-        Subject subject = SecurityUtils.getSubject();
-        //封装用户的登录数据
-        UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getUsername(), loginUser.getPassword());
-        try {
-            //执行登录方法
-            subject.login(token);
-            ResultSet<LoginUser> byUsername = loginUserService.findByUsername(loginUser.getUsername());
-            return ResultSet.success("登陆成功", byUsername.getEntity());
-        } catch (UnknownAccountException | IncorrectCredentialsException e) {
-            //用户名不存在
-            return ResultSet.error("登陆失败,用户名或密码错误");
-        }
+        return loginUserService.login(loginUser);
     }
 
     @ResponseBody

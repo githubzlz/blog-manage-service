@@ -4,6 +4,7 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,13 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
+
+    private CommonConfig commonConfig;
+
+    @Autowired
+    public void setCommonConfig(CommonConfig commonConfig){
+        this.commonConfig = commonConfig;
+    }
 
     @Bean
     public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager securityManager) {
@@ -37,9 +45,21 @@ public class ShiroConfig {
 //        filterMap.put("/user/add","perms[user:add]");
 //        filterMap.put("/user/update","perms[user:update]");
         filterMap.put("/login","anon");
+        filterMap.put("/getCheckCode/*","anon");
+        filterMap.put("/checkCode/check/*","anon");
+        filterMap.put("/sendemail","anon");
         filterMap.put("/**", "authc");
+
+        filterMap.put("/blog/all/**", "perms[BlogManagementAll]");
+        filterMap.put("/blog/all/select", "perms[ShowBlogAll]");
+        filterMap.put("/blog/all/update", "perms[UpdateBlogAll]");
+        filterMap.put("/blog/all/delete", "perms[DeleteBlogAll]");
+
+
+
+
         //设置登录的请求
-        shiroFilterFactoryBean.setLoginUrl("/toLogin");
+        shiroFilterFactoryBean.setLoginUrl(commonConfig.shiroLoginPath);
         //未授权页面
         shiroFilterFactoryBean.setUnauthorizedUrl("/noauth");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);

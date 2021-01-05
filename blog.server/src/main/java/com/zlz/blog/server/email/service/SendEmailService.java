@@ -1,11 +1,24 @@
 package com.zlz.blog.server.email.service;
 
+import com.zlz.blog.common.entity.user.LoginUser;
+import com.zlz.blog.common.response.ResultSet;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author zhulinzhong
  * @version 1.0 CreateTime:2020-11-20 16:05
  * @description 发送邮件
  */
 public interface SendEmailService {
+
+    /**
+     * 发送简单邮件
+     * @param request
+     * @param user
+     * @return
+     */
+    ResultSet<String> sendLoginMail(HttpServletRequest request, LoginUser user);
 
     /**
      * 发送文本邮件

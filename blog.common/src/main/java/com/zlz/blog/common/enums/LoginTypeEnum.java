@@ -7,27 +7,27 @@ public enum LoginTypeEnum {
     /**
      * 账号密码登录
      */
-    PASSWORD(0, "账号密码登录"),
+    PASSWORD("PASSWORD", "账号密码登录"),
 
     /**
      * 邮箱验证码登录
      */
-    EMAIL_VERIFICATION_CODE(1, "邮箱验证码登录"),
+    EMAIL_VERIFICATION_CODE("EMAIL_VERIFICATION_CODE", "邮箱验证码登录"),
 
     /**
      * 手机验证码登录
      */
-    PHONE_VERIFICATION_CODE(2, "手机验证码登录");
+    PHONE_VERIFICATION_CODE("PHONE_VERIFICATION_CODE", "手机验证码登录");
 
-    private Integer code;
+    private String code;
     private String name;
 
-    LoginTypeEnum(Integer code, String name) {
+    LoginTypeEnum(String code, String name) {
         this.code = code;
         this.name = name;
     }
 
-    public Integer getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -40,7 +40,7 @@ public enum LoginTypeEnum {
      * @param code
      * @return
      */
-    public static LoginTypeEnum getLoginTypeEnum(Integer code){
+    public static LoginTypeEnum getLoginTypeEnum(String code){
         if(null != code){
             for(LoginTypeEnum typeEnum : LoginTypeEnum.values()){
                 if(typeEnum.getCode().equals(code)){

@@ -54,4 +54,10 @@ public class LoginUser implements Serializable {
      */
     @TableField(exist = false)
     private List<SysRole> sysRoles;
+
+    /**
+     * 邮箱验证码
+     */
+    @TableField(exist = false)
+    private String checkCode;
 }

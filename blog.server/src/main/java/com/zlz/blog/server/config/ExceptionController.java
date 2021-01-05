@@ -1,19 +1,13 @@
 package com.zlz.blog.server.config;
 
-import com.zlz.blog.common.entity.user.LoginUser;
 import com.zlz.blog.common.exception.BlogException;
 import com.zlz.blog.common.response.ResultSet;
 import lombok.extern.log4j.Log4j2;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
-import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author zhulinzhong
@@ -28,7 +22,9 @@ public class ExceptionController {
     @ExceptionHandler(value = Exception.class)
     public ResultSet exceptionHandler(Exception e) {
         log.error("发生异常:", e);
-        if(e instanceof UnauthorizedException){
+        if(e instanceof BlogException){
+            return ResultSet.error(e.getMessage());
+        }else if(e instanceof UnauthorizedException){
             String message = e.getMessage();
             boolean permission = message.contains("permission");
             boolean role = message.contains("role");
@@ -45,9 +41,7 @@ public class ExceptionController {
             return ResultSet.unauthorizedError(stringBuilder.toString());
         }else if (e instanceof UnauthenticatedException) {
             return ResultSet.loginError("登陆失败，用户名或密码错误");
-        }else if (e instanceof BlogException) {
-            return ResultSet.error(e.getMessage());
-        } else {
+        }else {
             return ResultSet.error(e.getMessage());
         }
     }

@@ -16,7 +16,7 @@ public interface LoginUserService {
      * @param type
      * @return
      */
-    ResultSet<LoginUser> registerUser(LoginUser loginUser, Integer type);
+    ResultSet<LoginUser> registerUser(LoginUser loginUser, String type);
 
     /**
      * 检查用户信息
@@ -35,5 +35,9 @@ public interface LoginUserService {
      */
     ResultSet<LoginUser> checkLoginUser(String username, String password, Integer type);
 
-    ResultSet<LoginUser> findByUsername(String name);
+    LoginUser findByEmail(String email);
+
+    LoginUser findByUsername(String name);
+
+    ResultSet login(LoginUser loginUser);
 }

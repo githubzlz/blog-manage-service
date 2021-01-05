@@ -66,7 +66,7 @@ public class BlogController {
      * @return ResultSet
      */
     @PostMapping("/list")
-    @RequiresPermissions("SystemUser")
+    @RequiresPermissions("ShowBlogAll")
     public ResultSet<Blog> selectAll(@RequestBody Blog blog, HttpServletRequest request) {
         return blogService.selectList(blog, request);
     }
