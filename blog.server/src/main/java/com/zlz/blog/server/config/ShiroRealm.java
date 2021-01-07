@@ -4,7 +4,7 @@ import com.zlz.blog.common.entity.user.LoginUser;
 import com.zlz.blog.common.entity.user.SysPermission;
 import com.zlz.blog.common.entity.user.SysRole;
 import com.zlz.blog.common.response.ResultSet;
-import com.zlz.blog.server.login.service.LoginUserService;
+import com.zlz.blog.server.user.service.LoginUserService;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;

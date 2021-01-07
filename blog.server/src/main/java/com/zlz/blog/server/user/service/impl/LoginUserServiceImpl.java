@@ -1,4 +1,4 @@
-package com.zlz.blog.server.login.service.impl;
+package com.zlz.blog.server.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zlz.blog.common.entity.user.LoginUser;
@@ -9,9 +9,9 @@ import com.zlz.blog.common.template.EmailRedisTemplate;
 import com.zlz.blog.common.util.CheckCodeUtil;
 import com.zlz.blog.common.util.EncryptionUtil;
 import com.zlz.blog.common.util.SqlResultUtil;
-import com.zlz.blog.server.login.mapper.AuthenticationMapper;
-import com.zlz.blog.server.login.mapper.LoginUserMapper;
-import com.zlz.blog.server.login.service.LoginUserService;
+import com.zlz.blog.server.user.mapper.AuthenticationMapper;
+import com.zlz.blog.server.user.mapper.LoginUserMapper;
+import com.zlz.blog.server.user.service.LoginUserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

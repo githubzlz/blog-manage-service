@@ -1,6 +1,5 @@
-package com.zlz.blog.server.login.mapper;
+package com.zlz.blog.server.user.mapper;
 
-import com.zlz.blog.common.entity.user.LoginUser;
 import com.zlz.blog.common.entity.user.SysRole;
 import org.apache.ibatis.annotations.Mapper;
 

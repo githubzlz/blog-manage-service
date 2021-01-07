@@ -5,7 +5,7 @@ import com.zlz.blog.common.response.ResultSet;
 import com.zlz.blog.common.template.EmailRedisTemplate;
 import com.zlz.blog.common.util.CheckCodeUtil;
 import com.zlz.blog.server.email.service.SendEmailService;
-import com.zlz.blog.server.login.service.LoginUserService;
+import com.zlz.blog.server.user.service.LoginUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

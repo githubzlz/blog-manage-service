@@ -1,4 +1,4 @@
-package com.zlz.blog.server.login.service;
+package com.zlz.blog.server.user.service;
 
 import com.zlz.blog.common.entity.user.LoginUser;
 import com.zlz.blog.common.response.ResultSet;

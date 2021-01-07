@@ -1,9 +1,9 @@
-package com.zlz.blog.server.login.controller;
+package com.zlz.blog.server.user.controller;
 
 import com.zlz.blog.common.entity.user.LoginUser;
 import com.zlz.blog.common.enums.LoginTypeEnum;
 import com.zlz.blog.common.response.ResultSet;
-import com.zlz.blog.server.login.service.LoginUserService;
+import com.zlz.blog.server.user.service.LoginUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -76,4 +76,5 @@ public class LoginController {
         }
         return ResultSet.error("未登录");
     }
+
 }
